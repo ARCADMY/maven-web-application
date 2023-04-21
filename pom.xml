@@ -98,13 +98,13 @@
 	    <repository>
 	      <id>nexus</id>
 	      <name>Arcadmy Technologies Releases Nexus Repository</name>
-	      <url>http://13.232.130.83:9091/arcadmy/repository/amazon-relese/</url>
+	      <url>http://13.232.7.140:9091/arcadmy/repository/amazon-relese/</url>
 	    </repository>
 
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>Arcadmy Technologies Snapshot Nexus Repository </name>
-	      <url>http://13.232.130.83:9091/arcadmy/repository/amazon-snapshot-relese/</url>
+	      <url>http://13.232.7.140:9091/arcadmy/repository/amazon-snapshot-relese/</url>
 	    </snapshotRepository>
 
 	</distributionManagement>
