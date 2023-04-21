@@ -1,0 +1,50 @@
+pipeline{
+    agent any
+    
+tools{
+    maven 'maven_3.8.6'
+}
+    triggers{
+        pollSCM('* * * * *')
+    }
+    
+    
+stages{
+    stage('git checkout'){
+        steps{
+         git branch: 'development', changelog: false, credentialsId: '71d6b66f-2fc0-4d37-9eec-ee6fcdcaf43e', poll: false, url: 'https://github.com/ARCADMY/maven-web-application.git'   
+        }
+    }
+    
+    stage('Maven build'){
+        steps{
+            sh "mvn clean package"
+        }
+    }
+    
+    stage('sonarqube'){
+        steps{
+            sh 'mvn clean sonar:sonar'
+        }
+    }
+    
+    stage('nexus'){
+        steps{
+            sh 'mvn clean deploy'
+        }
+    }
+    
+    stage('tomcat'){
+        steps{
+        sshagent(['2379c82e-43b3-4207-8512-e2fdcc17fece']) {
+    sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@13.126.207.187:/opt/apache-tomcat-9.0.73/webapps/"
+
+} 
+        }
+    }    
+    
+}
+    
+    
+    
+}
